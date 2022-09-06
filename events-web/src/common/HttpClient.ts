@@ -4,8 +4,6 @@ const HttpClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
 })
 
-console.log('baseUrl', import.meta.env.VITE_API_URL)
-
 // // Add a request interceptor
 // axios.interceptors.request.use(
 //   function (config) {

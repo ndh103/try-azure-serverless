@@ -5,12 +5,6 @@ project.lock.json
 *.pyc
 nupkg/
 
-# Visual Studio Code
-.vscode
-
-# Rider
-.idea
-
 # User-specific files
 *.suo
 *.user
@@ -35,3 +29,7 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
+
+__blobstorage__
+__azurite_db_blob__*
+__azurite_db_blob_extent__*
