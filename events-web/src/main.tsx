@@ -2,19 +2,47 @@ import axios from 'axios'
 import React, { ReactElement } from 'react'
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
+import { PublicClientApplication, EventType } from '@azure/msal-browser'
+
+import { msalConfig } from '@/configs/authConfig'
+import { MsalProvider } from '@azure/msal-react'
 import App from './App'
 import { store } from './app/store'
 import './index.css'
 import { globalConfig, globalConfigUrl } from './configs/config'
 
-const app: ReactElement = (
+export const msalInstance = new PublicClientApplication(msalConfig)
+
+// Default to using the first account if no account is active on page load
+if (!msalInstance.getActiveAccount() && msalInstance.getAllAccounts().length > 0) {
+  // Account selection logic is app dependent. Adjust as needed for different use cases.
+  msalInstance.setActiveAccount(msalInstance.getAllAccounts()[0])
+}
+
+// Optional - This will update account state if a user signs in from another tab or window
+msalInstance.enableAccountStorageEvents()
+
+msalInstance.addEventCallback((event) => {
+  if (
+    event.eventType === EventType.LOGIN_SUCCESS ||
+    event.eventType === EventType.ACQUIRE_TOKEN_SUCCESS ||
+    event.eventType === EventType.SSO_SILENT_SUCCESS
+  ) {
+    const { account } = event.payload as any
+    msalInstance.setActiveAccount(account)
+  }
+})
+
+const app = (
   <React.StrictMode>
-    <BrowserRouter>
+    <Router>
       <Provider store={store}>
-        <App />
+        <MsalProvider instance={msalInstance}>
+          <App />
+        </MsalProvider>
       </Provider>
-    </BrowserRouter>
+    </Router>
   </React.StrictMode>
 )
 
