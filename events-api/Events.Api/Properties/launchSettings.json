@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "try_azure_serverless": {
+    "events.api": {
       "commandName": "Project",
       "commandLineArgs": "--port 7210",
       "launchBrowser": false
