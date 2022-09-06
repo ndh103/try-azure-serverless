@@ -1,34 +1,18 @@
-import axios from 'axios'
+import axios, { AxiosInstance } from 'axios'
+import { globalConfig } from '@/configs/config'
 
-// eslint-disable-next-line no-debugger
-const HttpClient = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
-})
+let hasInstance = false
+let httpClient: AxiosInstance
 
-// // Add a request interceptor
-// axios.interceptors.request.use(
-//   function (config) {
-//     // Do something before request is sent
-//     return config
-//   },
-//   function (error) {
-//     // Do something with request error
-//     return Promise.reject(error)
-//   }
-// )
+const HttpClient = () => {
+  if (!hasInstance) {
+    httpClient = axios.create({
+      baseURL: globalConfig.config.apiUrl,
+    })
 
-// // Add a response interceptor
-// axios.interceptors.response.use(
-//   function (response) {
-//     // Any status code that lie within the range of 2xx cause this function to trigger
-//     // Do something with response data
-//     return response
-//   },
-//   function (error) {
-//     // Any status codes that falls outside the range of 2xx cause this function to trigger
-//     // Do something with response error
-//     return Promise.reject(error)
-//   }
-// )
+    hasInstance = true
+  }
+  return httpClient
+}
 
 export default HttpClient
