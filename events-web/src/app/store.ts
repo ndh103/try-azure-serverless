@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
-import tasksReducer from '@/pages/todo/tasksSlice'
+import tasksReducer from '@/pages/events/eventsSlice'
 
 export const store = configureStore({
   reducer: {
-    tasks: tasksReducer,
+    events: tasksReducer,
   },
 })
 

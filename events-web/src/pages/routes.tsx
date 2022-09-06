@@ -1,4 +1,4 @@
-import homeRoutes from './todo/routes'
+import homeRoutes from './events/routes'
 import aboutRoutes from './about/routes'
 
 function NotFoundPath() {

@@ -38,14 +38,14 @@ namespace Events.Api.FunctionApps
                     Id  = Guid.NewGuid().ToString(),
                     Description =" first event",
                     EventDate = new DateTime(2022, 9, 6),
-                    Tittle= "Clean up the air conditioner"
+                    Title= "Clean up the air conditioner"
                 },
                 new Event()
                 {
                     Id  = Guid.NewGuid().ToString(),
                     Description =" second event",
                     EventDate = new DateTime(2022, 9, 7),
-                    Tittle= "Fix the water purifier"
+                    Title= "Fix the water purifier"
                 }
             };
 

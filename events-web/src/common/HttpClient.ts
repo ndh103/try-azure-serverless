@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+// eslint-disable-next-line no-debugger
 const HttpClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
 })

@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom'
 import MainLayout from '../../layout/MainLayout'
 
-function TodoHome() {
+function EventHome() {
   return (
     <MainLayout>
       <Outlet />
@@ -9,4 +9,4 @@ function TodoHome() {
   )
 }
 
-export default TodoHome
+export default EventHome
