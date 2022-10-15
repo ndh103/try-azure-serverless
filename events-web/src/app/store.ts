@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import tasksReducer from '@/pages/events/eventsSlice'
+import tasksReducer from '@/features/events/eventsSlice'
 
 export const store = configureStore({
   reducer: {

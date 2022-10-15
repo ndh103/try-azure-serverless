@@ -5,6 +5,8 @@ VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Events.Api", "Events.Api\Events.Api.csproj", "{E7D9E2AF-84CE-42A0-ACAC-79361B659EDB}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Events.Share", "Events.Share\Events.Share.csproj", "{EB4DF453-21D4-4801-A582-55CD32ED99F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{E7D9E2AF-84CE-42A0-ACAC-79361B659EDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7D9E2AF-84CE-42A0-ACAC-79361B659EDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7D9E2AF-84CE-42A0-ACAC-79361B659EDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB4DF453-21D4-4801-A582-55CD32ED99F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB4DF453-21D4-4801-A582-55CD32ED99F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB4DF453-21D4-4801-A582-55CD32ED99F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB4DF453-21D4-4801-A582-55CD32ED99F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

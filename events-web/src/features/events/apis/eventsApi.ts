@@ -5,7 +5,7 @@ class EventsApi {
 
   getAll() {
     return HttpClient()
-      .get(`${this.urlPrefix}/GetEvents`)
+      .get(`${this.urlPrefix}`)
       .catch(() => null)
   }
 }
