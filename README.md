@@ -8,6 +8,8 @@ Serverless micro-services using Azure Infrastructure.
 
 # Todos
 
+- Integrate with Microsoft Graph API
+  - https://learn.microsoft.com/en-us/azure/active-directory-b2c/microsoft-graph-get-started?tabs=app-reg-ga
 - Design Authorization api and database
 - Validate the JWT Token inside the function app
   - [https://medium.com/cheranga/azure-functions-validate-azure-active-directory-tokens-using-your-own-custom-binding-4b4ff648d8ac](https://medium.com/cheranga/azure-functions-validate-azure-active-directory-tokens-using-your-own-custom-binding-4b4ff648d8ac)
