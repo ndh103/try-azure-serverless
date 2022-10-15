@@ -8,6 +8,9 @@ Serverless micro-services using Azure Infrastructure.
 
 # Todos
 
+- Custom login page
+  - https://dev.to/425show/customize-the-look-and-feel-of-your-azure-ad-b2c-page-30m6
+  - https://learn.microsoft.com/en-us/azure/active-directory-b2c/customize-ui-with-html?pivots=b2c-user-flow
 - Integrate with Microsoft Graph API
   - https://learn.microsoft.com/en-us/azure/active-directory-b2c/microsoft-graph-get-started?tabs=app-reg-ga
 - Design Authorization api and database
