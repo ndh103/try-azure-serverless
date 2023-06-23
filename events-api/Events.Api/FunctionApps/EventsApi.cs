@@ -21,8 +21,8 @@ public class EventsApi
     }
 
     [OpenApiOperation(operationId: "GetEvents", tags: new[] { "Events" }, Summary = "Get Events", Description = "Get Events")]
-    [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "x-functions-key", In = OpenApiSecurityLocationType.Header)]
-    // [OpenApiSecurity("Authorization", SecuritySchemeType.ApiKey, Name = "Authorization", In = OpenApiSecurityLocationType.Header)]
+    // [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "x-functions-key", In = OpenApiSecurityLocationType.Header)]
+    [OpenApiSecurity("Authorization", SecuritySchemeType.ApiKey, Name = "Authorization", In = OpenApiSecurityLocationType.Header)]
     // [OpenApiParameter(name: "id", In = ParameterLocation.Path, Required = true, Type = typeof(string), Description = "Id of the event")]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json; charset=utf-8", bodyType: typeof(List<Event>), Description = "The OK response")]
     [Function(nameof(GetEvents))]
@@ -50,6 +50,23 @@ public class EventsApi
         };
 
         response.WriteString(JsonConvert.SerializeObject(events));
+
+        return response;
+    }
+
+    [OpenApiOperation(operationId: "AddEvents", tags: new[] { "Events" }, Summary = "Add Events", Description = "Add Events")]
+    // [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "x-functions-key", In = OpenApiSecurityLocationType.Header)]
+    [OpenApiSecurity("Authorization", SecuritySchemeType.ApiKey, Name = "Authorization", In = OpenApiSecurityLocationType.Header)]
+    [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json; charset=utf-8", bodyType: typeof(List<Event>), Description = "The OK response")]
+    [Function(nameof(AddEvent))]
+    public async Task<HttpResponseData> AddEvent([HttpTrigger(AuthorizationLevel.Function, "post", Route ="events")] HttpRequestData req)
+    {
+        var response = req.CreateResponse(HttpStatusCode.OK);
+        response.Headers.Add("Content-Type", "application/json; charset=utf-8");
+
+        var test = await req.ReadFromJsonAsync<Event>();
+
+        response.WriteString(JsonConvert.SerializeObject(test));
 
         return response;
     }
