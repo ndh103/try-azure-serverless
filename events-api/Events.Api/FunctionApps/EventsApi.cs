@@ -20,13 +20,30 @@ public class EventsApi
         _logger = loggerFactory.CreateLogger<EventsApi>();
     }
 
+    [OpenApiOperation(operationId: "CheckJwt", tags: new[] { "CheckJwt" }, Summary = "CheckJwt", Description = "CheckJwt")]
+    // [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "x-functions-key", In = OpenApiSecurityLocationType.Header)]
+    [OpenApiSecurity("Authorization", SecuritySchemeType.ApiKey, Name = "Authorization", In = OpenApiSecurityLocationType.Header)]
+    // [OpenApiParameter(name: "id", In = ParameterLocation.Path, Required = true, Type = typeof(string), Description = "Id of the event")]
+    [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json; charset=utf-8", bodyType: typeof(List<Event>), Description = "The OK response")]
+    [Function(nameof(CheckJwt))]
+    public HttpResponseData CheckJwt([HttpTrigger(AuthorizationLevel.Function, "get", Route = "jwts")] HttpRequestData req)
+    {
+        var response = req.CreateResponse(HttpStatusCode.OK);
+        response.Headers.Add("Content-Type", "application/json; charset=utf-8");
+
+        var jwt = GetJwtFromHeader(req);
+
+        response.WriteString(JsonConvert.SerializeObject(new { appJwt = jwt }));
+        return response;
+    }
+
     [OpenApiOperation(operationId: "GetEvents", tags: new[] { "Events" }, Summary = "Get Events", Description = "Get Events")]
     // [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "x-functions-key", In = OpenApiSecurityLocationType.Header)]
     [OpenApiSecurity("Authorization", SecuritySchemeType.ApiKey, Name = "Authorization", In = OpenApiSecurityLocationType.Header)]
     // [OpenApiParameter(name: "id", In = ParameterLocation.Path, Required = true, Type = typeof(string), Description = "Id of the event")]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json; charset=utf-8", bodyType: typeof(List<Event>), Description = "The OK response")]
     [Function(nameof(GetEvents))]
-    public HttpResponseData GetEvents([HttpTrigger(AuthorizationLevel.Function, "get", Route ="events")] HttpRequestData req)
+    public HttpResponseData GetEvents([HttpTrigger(AuthorizationLevel.Function, "get", Route = "events")] HttpRequestData req)
     {
         var response = req.CreateResponse(HttpStatusCode.OK);
         response.Headers.Add("Content-Type", "application/json; charset=utf-8");
@@ -59,7 +76,7 @@ public class EventsApi
     [OpenApiSecurity("Authorization", SecuritySchemeType.ApiKey, Name = "Authorization", In = OpenApiSecurityLocationType.Header)]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json; charset=utf-8", bodyType: typeof(List<Event>), Description = "The OK response")]
     [Function(nameof(AddEvent))]
-    public async Task<HttpResponseData> AddEvent([HttpTrigger(AuthorizationLevel.Function, "post", Route ="events")] HttpRequestData req)
+    public async Task<HttpResponseData> AddEvent([HttpTrigger(AuthorizationLevel.Function, "post", Route = "events")] HttpRequestData req)
     {
         var response = req.CreateResponse(HttpStatusCode.OK);
         response.Headers.Add("Content-Type", "application/json; charset=utf-8");
@@ -69,5 +86,25 @@ public class EventsApi
         response.WriteString(JsonConvert.SerializeObject(test));
 
         return response;
+    }
+
+    private string GetJwtFromHeader(HttpRequestData req)
+    {
+        req.Headers.TryGetValues("Authorization", out var authorizationHeaders);
+
+        if (authorizationHeaders == null || !authorizationHeaders.Any())
+        {
+            return string.Empty;
+        }
+
+        var authHeaderValue = authorizationHeaders.First().ToString();
+        if (!authHeaderValue.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase))
+        {
+            // Scheme is not Bearer
+            return string.Empty;
+        }
+
+        var token = authHeaderValue.Substring("Bearer ".Length).Trim();
+        return token;
     }
 }
