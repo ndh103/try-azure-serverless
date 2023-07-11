@@ -31,6 +31,7 @@
     <Using Include="System.Threading.ExecutionContext" Alias="ExecutionContext" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="FunctionApps\Models\" />
     <Folder Include="Infrastructures\" />
   </ItemGroup>
   <ItemGroup>

@@ -74,6 +74,7 @@ public class EventsApi
     [OpenApiOperation(operationId: "AddEvents", tags: new[] { "Events" }, Summary = "Add Events", Description = "Add Events")]
     // [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "x-functions-key", In = OpenApiSecurityLocationType.Header)]
     [OpenApiSecurity("Authorization", SecuritySchemeType.ApiKey, Name = "Authorization", In = OpenApiSecurityLocationType.Header)]
+    [OpenApiRequestBody("application/json; charset=utf-8", bodyType: typeof(Event))]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json; charset=utf-8", bodyType: typeof(List<Event>), Description = "The OK response")]
     [Function(nameof(AddEvent))]
     public async Task<HttpResponseData> AddEvent([HttpTrigger(AuthorizationLevel.Function, "post", Route = "events")] HttpRequestData req)
