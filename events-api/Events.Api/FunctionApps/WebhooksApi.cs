@@ -40,7 +40,7 @@ public class WebhooksApi
         return response;
     }
 
-    [OpenApiOperation(operationId: "Add Webhooks", tags: new[] { "Webhooks" }, Summary = "Add Webhooks", Description = "Add Webhooks")]
+    [OpenApiOperation(operationId: "Remove Webhooks", tags: new[] { "Webhooks" }, Summary = "Remove Webhooks", Description = "Remove Webhooks")]
     // [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "x-functions-key", In = OpenApiSecurityLocationType.Header)]
     [OpenApiSecurity("Authorization", SecuritySchemeType.ApiKey, Name = "Authorization", In = OpenApiSecurityLocationType.Header)]
     [OpenApiParameter(name: "webhookId", In = ParameterLocation.Path, Required = true, Type = typeof(string), Description = "Id of the webhook")]
